@@ -40,7 +40,7 @@ La requête est en <code>POST</code>
 
 time curl -X POST -H "Content-Type: application/json" -H\
 "X-Access-Token":"1234567890" -d \
-'{"email":"test@epitech.eu", "password":"123456", "username":"Unicorn",}' \
+'{"email":"test@epitech.eu", "password":"123456", "username":"Unicorn"}' \
 https://api.offroute.fr/Users/CreateUser
 
 ```
