@@ -288,7 +288,7 @@ La requête est en <code>POST</code>
 <p>Un exemple de requête dans un shell serait :</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
-<span class="nb">time </span>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> -H<span class="se">\</span>
+<span class="nb">time </span>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> -H <span class="se">\</span>
 <span class="s2">"X-Access-Token"</span>:<span class="s2">"1234567890"</span> -d <span class="se">\</span>
 <span class="s1">'{"email":"test@epitech.eu", "password":"123456", "username":"Unicorn"}'</span> <span class="se">\</span>
 https://api.offroute.fr/Users/CreateUser
@@ -438,7 +438,7 @@ La requête est en <code>DELETE</code>
 </aside>
 <pre class="highlight shell tab-shell"><code>
 <span class="nb">time </span>curl -X DELETE -H <span class="s2">"Content-Type: application/json"</span> -H <span class="se">\</span>
-<span class="s2">"X-Access-Token"</span>:<span class="s2">"1234567890"</span><span class="se">\</span>
+<span class="s2">"X-Access-Token"</span>:<span class="s2">"1234567890"</span> <span class="se">\</span>
 https://api.offroute.fr/Users/Logout
 
 </code></pre><h3 id='requete-http-4'>Requête HTTP :</h3>
@@ -475,7 +475,7 @@ La requête est en <code>GET</code>
 </aside>
 <pre class="highlight shell tab-shell"><code>
 <span class="nb">time </span>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> -H <span class="se">\</span>
-<span class="s2">"X-Access-Token: 8iVdv2PCvWbJJNp"</span> -d<span class="se">\</span>
+<span class="s2">"X-Access-Token: 8iVdv2PCvWbJJNp"</span> <span class="se">\</span>
 https://api.offroute.fr/Users/getUserInformation
 
 </code></pre><h3 id='requete-http-5'>Requête HTTP :</h3>
@@ -536,7 +536,7 @@ La requête est en <code>PUT</code>
 </aside>
 <pre class="highlight shell tab-shell"><code>
 <span class="nb">time </span>curl -X PUT -H <span class="s2">"Content-Type: application/json"</span> -H <span class="se">\</span>
-<span class="s2">"X-Access-Token: 8iVdv2PCvWbJJNp"</span> -d
+<span class="s2">"X-Access-Token: 8iVdv2PCvWbJJNp"</span> -d <span class="se">\</span>
 <span class="s1">'{"Username":"Wonderful_unicorn"}'</span> <span class="se">\</span>
 https://api.offroute.fr/Users/setUserModification
 
