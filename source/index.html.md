@@ -1,15 +1,11 @@
 ---
-title: API Reference
+title: API Offroute
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - JSON
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='http://offroute.fr'>Venez nous découvrir sur le site de l'API</a>
 
 includes:
   - errors
@@ -19,221 +15,398 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Bienvenue sur la documentation de l'application Offroute.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+Une solution de de navigation inertielle pour Smartphone qui vous facilitera les déplacements dans les zones sans couvertures réseau.
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Toutes les requêtes doivent obligatoirement contenir dans leur header un <code>Content-Type : application/json</code>
 </aside>
 
-# Kittens
+# Création d'un compte, Authentification et Connexion
 
-## Get All Kittens
+## Création d'un compte Utilisateur
 
-```ruby
-require 'kittn'
+La requête suivante permet de créer un compte sur notre application.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
 
-```python
-import kittn
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+> Un exemple de requête dans un shell serait :
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+
+time curl -X POST -H "Content-Type: application/json" -d \
+'{"password":"123456", "email":"test@epitech.eu", "login":"unicorn", "access_token":"1234567890"}' \
+https://api.offroute.fr/Users/CreateUser
+
 ```
 
-```javascript
-const kittn = require('kittn');
+### Arguments attendus :
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
+La liste suivante recense tout les arguments acceptés et pouvant être utilisés, lors de l'utilisation de cette commande.
 
-> The above command returns JSON structured like this:
+Arguments | Exemple
+--------- | -------
+login | Shaun
+password | poli45\
+firstname | Arthur
+lastname | Lefèvre
+age | 21
+email | shone.witze@gmail.com
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
 
-This endpoint retrieves all kittens.
+### Requête HTTP :
 
-### HTTP Request
+`POST https://api.offroute.fr/Users/CreateUser`
 
-`GET http://example.com/api/kittens`
 
-### Query Parameters
+### Retour :
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Un retour depuis l'API serait, par exemple, sous la forme :
+
+Paramètres | Valeur
+--------- | -------
+status_code | 201
+Id | 142
+Message | User created
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Lorsque la création d'un compte est réussie, le code de retour (status_code) est le 201
 </aside>
 
-## Get a Specific Kitten
 
-```ruby
-require 'kittn'
+## Connaître la validité d'un compte utilisateur
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+Afin de savoir si votre compte est toujours valide, utilisez la requête suivante :
 
-```python
-import kittn
+<aside class="notice">
+La requête est en <code>GET</code>
+</aside>
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+
+time curl -X GET -H "Content-Type: application/json" -d \
+'{"login": "unicorn", "token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+https://api.offroute.fr/Users/ValidAccount
+
 ```
 
-```javascript
-const kittn = require('kittn');
+### Requête HTTP :
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
+`GET https://api.offroute.fr/Users/ValidAccount`
 
-> The above command returns JSON structured like this:
+### Arguments attendus :
 
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
+Cette requête n'attend que deux arguments : le <code>login</code> et le <code>token</code>.
 
-This endpoint retrieves a specific kitten.
+### Retour :
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+Un retour depuis l'API serait, par exemple, sous la forme :
 
-### HTTP Request
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+Message | This account is valid
 
-`GET http://example.com/kittens/<ID>`
+<aside class="success">
+Lorsque la création d'un compte est réussie, le code de retour (status_code) est le 200.
+</aside>
 
-### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+## Connexion à l'application
 
-## Delete a Specific Kitten
+Afin de correctement se connecter à notre application, il est nécessaire que le compte soit créé et qu'il soit toujours valide.
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+<aside class="notice">
+La requète est en <code>POST</code>
+</aside>
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
+
+time curl -X POST -H "Content-Type: application/json" -d \
+'{"login": "unicorn", "password":"123456"}' \
+https://api.offroute.fr/Users/Login
+
 ```
 
-```javascript
-const kittn = require('kittn');
+### Requête HTTP :
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+`POST https://api.offroute.fr/Users/Login`
+
+### Arguments attendus :
+
+Cette requête n'attend que deux arguments : votre <code>login</code> et votre <code>password</code>.
+
+### Retour :
+
+Un retour depuis l'API serait, par exemple, sous la forme :
+
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+login | im8Md1lnVxhGGhgsjsHrksF5ByU
+Message | You are logged in
+
+<aside class="success">
+Lorsque la connexion à l'application est réussie, le code de retour (status_code) est le 200.
+</aside>
+
+## Déconnexion de l'application
+
+Si vous avez le besoin de vous déconnecter de l'application, utilisez la requête suivante.
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+
+```shell
+
+time curl -X POST -H "Content-Type: application/json" -d \
+'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+https://api.offroute.fr/Users/Logout
+
 ```
 
-> The above command returns JSON structured like this:
+### Requête HTTP :
 
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
+`POST https://api.offroute.fr/Users/Logout`
+
+### Arguments attendus :
+
+Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>
+
+### Retour :
+
+Un retour depuis l'API serait, par exemple, sous la forme :
+
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+Message | You are disconnected
+
+<aside class="success">
+Lorsque vous avez réussi à vous déconnecter de l'API, le code de retour (status_code) est le 200.
+</aside>
+
+
+# Modification du compte
+
+## Affichage de vos informations personnelles
+
+Afin de récupérer correctement toutes les informations de votre compte, lancez la requête suivante.
+
+<aside class="notice">
+La requête est en <code>GET</code>
+</aside>
+
+```shell
+
+time curl -X GET -H "Content-Type: application/json" -d \
+'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+https://api.offroute.fr/Users/getUserInformation
+
 ```
 
-This endpoint deletes a specific kitten.
+### Requête HTTP :
 
-### HTTP Request
+`GET https://api.offroute.fr/Users/getUserInformation`
 
-`DELETE http://example.com/kittens/<ID>`
 
-### URL Parameters
+### Arguments attendus :
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>
 
+### Retour :
+
+Un retour depuis l'API serait, par exemple, sous la forme :
+
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+login | Shaun
+age | 21
+password | poli45\
+firstname | Arthur
+lastname | Lefèvre
+email | shone.witze@gmail.com
+Id | 142
+
+<aside class="success">
+Lorsque la requête à fonctionné et que vous avez pu récupéré les informations, le code de retour (status_code) est le 200.
+</aside>
+
+## Modification de vos informations personnelles
+
+Afin de modifier, certaines ou la totalité de vos informations personnelles, lancez la requête suivante.
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+
+```shell
+
+time curl -X POST -H "Content-Type: application/json" -d \
+'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU", "login":"wonderful_unicorn", "age":"24"}' \
+https://api.offroute.fr/Users/setUserInformation
+
+```
+
+### Requête HTTP :
+
+`POST https://api.offroute.fr/Users/setUserInformation`
+
+### Arguments attendus :
+
+Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>, suivi des arguments et des clés que vous souhaitez modifier parmi la liste suivante :
+
+Arguments | Exemple de clés
+--------- | -------
+login | Shaun The Sheep
+password | Wrath56/
+firstname | Emmanuel
+lastname | Decronumbourg
+age | 21
+email | shone.witze@gmail.com
+Id | 142
+
+Il n'est pas nécessaire de rajouter en argument, des informations que vous en souhaitez pas modifier.
+
+### Retour :
+
+Lorsque la requête a été correctement exécuté, l'API vous renverra une liste récapitulant toutes vos informations personnelles.
+
+Ainsi, un retour depuis l'API pourrait être sous la forme :
+
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+login | Shaun The Sheep
+age | 21
+password | Wrath56/
+firstname | Emmanuel
+lastname | Decronumbourg
+email | shone.witze@gmail.com
+Id | 142
+
+<aside class="success">
+Lorsque les informations ont été correctement modifié, le code de retour (status_code) est le 200.
+</aside>
+
+## Changement du mot de passe
+
+Afin de changer le mot de passe, il vous faut passer par cette requête.
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+
+```shell
+
+time curl -X POST -H "Content-Type: application/json" -d \
+'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU", "new_password":"secret_unicorn"}' \
+https://api.offroute.fr/Users/updateUserPassword
+
+```
+
+### Requête HTTP :
+
+`POST https://api.offroute.fr/Users/updateUserPassword`
+
+### Arguments attendus :
+
+Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>, il vous suffira de suivre cet argument du nouveau mot de passe.
+
+### Retour :
+
+Lorsque la requête a été correctement exécuté, l'API vous renverra le mot de passe modifié.
+
+Un retour depuis l'API peut être, par exemple :
+
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+password | secret_unicorn
+Message | Your password has been changed
+
+<aside class="success">
+Lorsque le mot de passe est changé avec succès, le code de retour (status_code) est le 200.
+</aside>
+
+## Récupération du mot de passe
+
+Afin de récupérer le mot de passe, en cas de perte, il vous faut passer par cette requête.
+
+<aside class="notice">
+La requête est en <code>GET</code>
+</aside>
+
+```shell
+
+time curl -X GET -H "Content-Type: application/json" -d \
+'{"email":"shone.witze@gmail.com", "username":"Shaun The Sheep"}' \
+https://api.offroute.fr/Users/getUserPassword
+
+```
+
+### Requête HTTP :
+
+`GET https://api.offroute.fr/Users/getUserPassword`
+
+### Arguments attendus :
+
+Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : le <code>token</code>. Il vous suffira de faire suivre cet argument par le nouveau mot de passe.
+
+### Retour :
+
+Lorsque la requête a été correctement exécuté, l'API vous renverra le mot de passe modifié.
+
+Un retour depuis l'API peut être, par exemple :
+
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+password | secret_unicorn
+Message | Your password has been changed
+
+<aside class="success">
+Lorsque les informations ont été correctement modifié, le code de retour (status_code) est le 200.
+</aside>
+
+
+## Suppression du compte
+
+Si un compte doit être supprimé, il faut passer par cette requête.
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+
+```shell
+
+time curl -X GET -H "Content-Type: application/json" -d \
+'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+https://api.offroute.fr/Users/deleteUser
+
+```
+
+### Arguments attendus :
+
+Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>.
+
+
+### Retour :
+
+Lorsque la requête a été correctement exécuté, l'API vous indiquera le suppression du compte.
+
+Paramètres | Valeur
+--------- | -------
+status_code | 200
+Message | Your account has been deleted
+
+<aside class="success">
+Lorsque le compte a été supprimé avec succès, le code de retour (status_code) est le 200.
+</aside>
