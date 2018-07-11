@@ -38,8 +38,9 @@ La requête est en <code>POST</code>
 
 ```shell
 
-time curl -X POST -H "Content-Type: application/json" -d \
-'{"password":"123456", "email":"test@epitech.eu", "login":"unicorn", "access_token":"1234567890"}' \
+time curl -X POST -H "Content-Type: application/json" -H\
+"X-Access-Token":"1234567890" -d \
+'{"email":"test@epitech.eu", "password":"123456", "username":"Unicorn",}' \
 https://api.offroute.fr/Users/CreateUser
 
 ```
@@ -70,7 +71,6 @@ Un retour depuis l'API serait, par exemple, sous la forme :
 Paramètres | Valeur
 --------- | -------
 status_code | 201
-Id | 142
 Message | User created
 
 <aside class="success">
@@ -89,8 +89,9 @@ La requête est en <code>GET</code>
 
 ```shell
 
-time curl -X GET -H "Content-Type: application/json" -d \
-'{"login": "unicorn", "token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+time curl -X GET -H "Content-Type: application/json" -H \
+"X-Access-Token":"1234567890" -d \
+'{"login": "unicorn"}' \
 https://api.offroute.fr/Users/ValidAccount
 
 ```
@@ -128,7 +129,7 @@ La requète est en <code>POST</code>
 ```shell
 
 time curl -X POST -H "Content-Type: application/json" -d \
-'{"login": "unicorn", "password":"123456"}' \
+'{"email": "lysa.lewitanski@yahoo.fr", "password":"test"}' \
 https://api.offroute.fr/Users/Login
 
 ```
@@ -148,8 +149,8 @@ Un retour depuis l'API serait, par exemple, sous la forme :
 Paramètres | Valeur
 --------- | -------
 status_code | 200
-login | im8Md1lnVxhGGhgsjsHrksF5ByU
-Message | You are logged in
+access_token | im8Md1lnVxhGGhgsjsHrksF5ByU
+Message | You are connected
 
 <aside class="success">
 Lorsque la connexion à l'application est réussie, le code de retour (status_code) est le 200.
@@ -160,20 +161,20 @@ Lorsque la connexion à l'application est réussie, le code de retour (status_co
 Si vous avez le besoin de vous déconnecter de l'application, utilisez la requête suivante.
 
 <aside class="notice">
-La requête est en <code>POST</code>
+La requête est en <code>DELETE</code>
 </aside>
 
 ```shell
 
-time curl -X POST -H "Content-Type: application/json" -d \
-'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+time curl -X DELETE -H "Content-Type: application/json" -H \
+"X-Access-Token":"1234567890"\
 https://api.offroute.fr/Users/Logout
 
 ```
 
 ### Requête HTTP :
 
-`POST https://api.offroute.fr/Users/Logout`
+`DELETE https://api.offroute.fr/Users/Logout`
 
 ### Arguments attendus :
 
@@ -205,8 +206,8 @@ La requête est en <code>GET</code>
 
 ```shell
 
-time curl -X GET -H "Content-Type: application/json" -d \
-'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+time curl -X GET -H "Content-Type: application/json" -H \
+"X-Access-Token: 8iVdv2PCvWbJJNp" -d\
 https://api.offroute.fr/Users/getUserInformation
 
 ```
@@ -227,13 +228,13 @@ Un retour depuis l'API serait, par exemple, sous la forme :
 Paramètres | Valeur
 --------- | -------
 status_code | 200
-login | Shaun
-age | 21
+username | Shaun
+birthdate | Fri, 06 Jul 2018 00:00:00 GMT
 password | poli45\
 firstname | Arthur
 lastname | Lefèvre
 email | shone.witze@gmail.com
-Id | 142
+id_user | 142
 
 <aside class="success">
 Lorsque la requête à fonctionné et que vous avez pu récupéré les informations, le code de retour (status_code) est le 200.
@@ -244,40 +245,42 @@ Lorsque la requête à fonctionné et que vous avez pu récupéré les informati
 Afin de modifier, certaines ou la totalité de vos informations personnelles, lancez la requête suivante.
 
 <aside class="notice">
-La requête est en <code>POST</code>
+La requête est en <code>PUT</code>
 </aside>
 
 ```shell
 
-time curl -X POST -H "Content-Type: application/json" -d \
-'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU", "login":"wonderful_unicorn", "age":"24"}' \
-https://api.offroute.fr/Users/setUserInformation
+time curl -X PUT -H "Content-Type: application/json" -H \
+"X-Access-Token: 8iVdv2PCvWbJJNp" -d
+'{"Username":"Wonderful_unicorn"}' \
+https://api.offroute.fr/Users/setUserModification
 
 ```
 
 ### Requête HTTP :
 
-`POST https://api.offroute.fr/Users/setUserInformation`
+`PUT https://api.offroute.fr/Users/setUserModification`
 
 ### Arguments attendus :
 
-Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>, suivi des arguments et des clés que vous souhaitez modifier parmi la liste suivante :
+Afin de lancer la requête, vous n'aurez besoin que de connaître les arguments que vous souhaitez modifier. Arguments se trouvant dans la liste suivante.
 
 Arguments | Exemple de clés
 --------- | -------
-login | Shaun The Sheep
+username | Shaun The Sheep
 password | Wrath56/
 firstname | Emmanuel
 lastname | Decronumbourg
+birthdate | Fri, 06 Jul 2018 00:00:00 GMT
 age | 21
 email | shone.witze@gmail.com
-Id | 142
+user_id | 142
 
 Il n'est pas nécessaire de rajouter en argument, des informations que vous en souhaitez pas modifier.
 
 ### Retour :
 
-Lorsque la requête a été correctement exécuté, l'API vous renverra une liste récapitulant toutes vos informations personnelles.
+Lorsque la requête a été correctement exécuté, l'API vous renverra les informations personnelles qui ont été modifié.
 
 Ainsi, un retour depuis l'API pourrait être sous la forme :
 
@@ -286,11 +289,8 @@ Paramètres | Valeur
 status_code | 200
 login | Shaun The Sheep
 age | 21
-password | Wrath56/
 firstname | Emmanuel
-lastname | Decronumbourg
 email | shone.witze@gmail.com
-Id | 142
 
 <aside class="success">
 Lorsque les informations ont été correctement modifié, le code de retour (status_code) est le 200.
@@ -301,35 +301,35 @@ Lorsque les informations ont été correctement modifié, le code de retour (sta
 Afin de changer le mot de passe, il vous faut passer par cette requête.
 
 <aside class="notice">
-La requête est en <code>POST</code>
+La requête est en <code>PUT</code>
 </aside>
 
 ```shell
 
-time curl -X POST -H "Content-Type: application/json" -d \
-'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU", "new_password":"secret_unicorn"}' \
+time curl -X PUT -H "Content-Type: application/json" -H \
+"X-Access-Token: 8iVdv2PCvWbJJNp" -d \
+'{"password":"123456", "new_password":"Secret_unicorn"}' \
 https://api.offroute.fr/Users/updateUserPassword
 
 ```
 
 ### Requête HTTP :
 
-`POST https://api.offroute.fr/Users/updateUserPassword`
+`PUT https://api.offroute.fr/Users/updateUserPassword`
 
 ### Arguments attendus :
 
-Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>, il vous suffira de suivre cet argument du nouveau mot de passe.
+Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : Le <code>token</code>, il vous suffira de suivre cet argument de l'ancien mot de passe, puis du nouveau.
 
 ### Retour :
 
-Lorsque la requête a été correctement exécuté, l'API vous renverra le mot de passe modifié.
+Lorsque la requête a été correctement exécuté, l'API vous enverra un message pour vous prévenir du changement.
 
 Un retour depuis l'API peut être, par exemple :
 
 Paramètres | Valeur
 --------- | -------
 status_code | 200
-password | secret_unicorn
 Message | Your password has been changed
 
 <aside class="success">
@@ -341,36 +341,35 @@ Lorsque le mot de passe est changé avec succès, le code de retour (status_code
 Afin de récupérer le mot de passe, en cas de perte, il vous faut passer par cette requête.
 
 <aside class="notice">
-La requête est en <code>GET</code>
+La requête est en <code>PUT</code>
 </aside>
 
 ```shell
 
-time curl -X GET -H "Content-Type: application/json" -d \
-'{"email":"shone.witze@gmail.com", "username":"Shaun The Sheep"}' \
+time curl -X PUT -H "Content-Type: application/json" -d \
+'{"email":"shone.witze@gmail.com"}' \
 https://api.offroute.fr/Users/getUserPassword
 
 ```
 
 ### Requête HTTP :
 
-`GET https://api.offroute.fr/Users/getUserPassword`
+`PUT https://api.offroute.fr/Users/getUserPassword`
 
 ### Arguments attendus :
 
-Afin de lancer la requête, vous n'aurez besoin de connaître qu'un seul argument : le <code>token</code>. Il vous suffira de faire suivre cet argument par le nouveau mot de passe.
+Afin de lancer la requête, vous n'aurez besoin que de renseigner votre adresse mail, afin que le mot de passe soit modifié, puis vous soit envoyé par mail.
 
 ### Retour :
 
-Lorsque la requête a été correctement exécuté, l'API vous renverra le mot de passe modifié.
+Lorsque la requête a été correctement exécuté, l'API vous préviendra de l'envoi du mail.
 
 Un retour depuis l'API peut être, par exemple :
 
 Paramètres | Valeur
 --------- | -------
 status_code | 200
-password | secret_unicorn
-Message | Your password has been changed
+Message | Your password has been changed. An email has been sent to you
 
 <aside class="success">
 Lorsque les informations ont été correctement modifié, le code de retour (status_code) est le 200.
@@ -382,16 +381,22 @@ Lorsque les informations ont été correctement modifié, le code de retour (sta
 Si un compte doit être supprimé, il faut passer par cette requête.
 
 <aside class="notice">
-La requête est en <code>POST</code>
+La requête est en <code>DELETE</code>
 </aside>
 
 ```shell
 
-time curl -X GET -H "Content-Type: application/json" -d \
-'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}' \
+time curl -X GET -H "Content-Type: application/json" -H \
+"X-Access-Token":"1234567890" -d \
+'{"email":"lisa.lewitanski@yahoo.fr", "password":"Secret_unicorn"}'
 https://api.offroute.fr/Users/deleteUser
 
 ```
+
+### Requête HTTP :
+
+`DELETE https://api.offroute.fr/Users/deleteUser`
+
 
 ### Arguments attendus :
 
