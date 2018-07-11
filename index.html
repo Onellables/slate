@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>API Offroute</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;JSON&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,10 +211,7 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="JSON">JSON</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -225,19 +222,39 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#creation-d-39-un-compte-authentification-et-connexion" class="toc-h1 toc-link" data-title="Création d'un compte, Authentification et Connexion">Création d'un compte, Authentification et Connexion</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#creation-d-39-un-compte-utilisateur" class="toc-h2 toc-link" data-title="Création d'un compte Utilisateur">Création d'un compte Utilisateur</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#connaitre-la-validite-d-39-un-compte-utilisateur" class="toc-h2 toc-link" data-title="Connaître la validité d'un compte utilisateur">Connaître la validité d'un compte utilisateur</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#connexion-a-l-39-application" class="toc-h2 toc-link" data-title="Connexion à l'application">Connexion à l'application</a>
+                  </li>
+                  <li>
+                    <a href="#deconnexion-de-l-39-application" class="toc-h2 toc-link" data-title="Déconnexion de l'application">Déconnexion de l'application</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#modification-du-compte" class="toc-h1 toc-link" data-title="Modification du compte">Modification du compte</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#affichage-de-vos-informations-personnelles" class="toc-h2 toc-link" data-title="Affichage de vos informations personnelles">Affichage de vos informations personnelles</a>
+                  </li>
+                  <li>
+                    <a href="#modification-de-vos-informations-personnelles" class="toc-h2 toc-link" data-title="Modification de vos informations personnelles">Modification de vos informations personnelles</a>
+                  </li>
+                  <li>
+                    <a href="#changement-du-mot-de-passe" class="toc-h2 toc-link" data-title="Changement du mot de passe">Changement du mot de passe</a>
+                  </li>
+                  <li>
+                    <a href="#recuperation-du-mot-de-passe" class="toc-h2 toc-link" data-title="Récupération du mot de passe">Récupération du mot de passe</a>
+                  </li>
+                  <li>
+                    <a href="#suppression-du-compte" class="toc-h2 toc-link" data-title="Suppression du compte">Suppression du compte</a>
                   </li>
               </ul>
           </li>
@@ -246,258 +263,518 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='http://offroute.fr'>Venez nous découvrir sur le site de l'API</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Bienvenue sur la documentation de l&#39;application Offroute.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>Une solution de de navigation inertielle pour Smartphone qui vous facilitera les déplacements dans les zones sans couvertures réseau.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Toutes les requêtes doivent obligatoirement contenir dans leur header un <code>Content-Type : application/json</code>
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='creation-d-39-un-compte-authentification-et-connexion'>Création d&#39;un compte, Authentification et Connexion</h1><h2 id='creation-d-39-un-compte-utilisateur'>Création d&#39;un compte Utilisateur</h2>
+<p>La requête suivante permet de créer un compte sur notre application.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Un exemple de requête dans un shell serait :</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"password":"123456", "email":"test@epitech.eu", "login":"unicorn", "access_token":"1234567890"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/CreateUser
+
+</code></pre><h3 id='arguments-attendus'>Arguments attendus :</h3>
+<p>La liste suivante recense tout les arguments acceptés et pouvant être utilisés, lors de l&#39;utilisation de cette commande.</p>
+
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
+<th>Arguments</th>
+<th>Exemple</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>login</td>
+<td>Shaun</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>password</td>
+<td>poli45\</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Arthur</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Lefèvre</td>
+</tr>
+<tr>
+<td>age</td>
+<td>21</td>
+</tr>
+<tr>
+<td>email</td>
+<td>shone.witze@gmail.com</td>
+</tr>
+</tbody></table>
+<h3 id='requete-http'>Requête HTTP :</h3>
+<p><code>POST https://api.offroute.fr/Users/CreateUser</code></p>
+<h3 id='retour'>Retour :</h3>
+<p>Un retour depuis l&#39;API serait, par exemple, sous la forme :</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>201</td>
+</tr>
+<tr>
+<td>Id</td>
+<td>142</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>User created</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Lorsque la création d'un compte est réussie, le code de retour (status_code) est le 201
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='connaitre-la-validite-d-39-un-compte-utilisateur'>Connaître la validité d&#39;un compte utilisateur</h2>
+<p>Afin de savoir si votre compte est toujours valide, utilisez la requête suivante :</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+La requête est en <code>GET</code>
 </aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"login": "unicorn", "token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/ValidAccount
 
-<p>The Kittn API uses the following error codes:</p>
+</code></pre><h3 id='requete-http-2'>Requête HTTP :</h3>
+<p><code>GET https://api.offroute.fr/Users/ValidAccount</code></p>
+<h3 id='arguments-attendus-2'>Arguments attendus :</h3>
+<p>Cette requête n&#39;attend que deux arguments : le <code>login</code> et le <code>token</code>.</p>
+<h3 id='retour-2'>Retour :</h3>
+<p>Un retour depuis l&#39;API serait, par exemple, sous la forme :</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Paramètres</th>
+<th>Valeur</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>This account is valid</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque la création d'un compte est réussie, le code de retour (status_code) est le 200.
+</aside>
+<h2 id='connexion-a-l-39-application'>Connexion à l&#39;application</h2>
+<p>Afin de correctement se connecter à notre application, il est nécessaire que le compte soit créé et qu&#39;il soit toujours valide.</p>
+
+<aside class="notice">
+La requète est en <code>POST</code>
+</aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"login": "unicorn", "password":"123456"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/Login
+
+</code></pre><h3 id='requete-http-3'>Requête HTTP :</h3>
+<p><code>POST https://api.offroute.fr/Users/Login</code></p>
+<h3 id='arguments-attendus-3'>Arguments attendus :</h3>
+<p>Cette requête n&#39;attend que deux arguments : votre <code>login</code> et votre <code>password</code>.</p>
+<h3 id='retour-3'>Retour :</h3>
+<p>Un retour depuis l&#39;API serait, par exemple, sous la forme :</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>login</td>
+<td>im8Md1lnVxhGGhgsjsHrksF5ByU</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>You are logged in</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque la connexion à l'application est réussie, le code de retour (status_code) est le 200.
+</aside>
+<h2 id='deconnexion-de-l-39-application'>Déconnexion de l&#39;application</h2>
+<p>Si vous avez le besoin de vous déconnecter de l&#39;application, utilisez la requête suivante.</p>
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/Logout
+
+</code></pre><h3 id='requete-http-4'>Requête HTTP :</h3>
+<p><code>POST https://api.offroute.fr/Users/Logout</code></p>
+<h3 id='arguments-attendus-4'>Arguments attendus :</h3>
+<p>Afin de lancer la requête, vous n&#39;aurez besoin de connaître qu&#39;un seul argument : Le <code>token</code></p>
+<h3 id='retour-4'>Retour :</h3>
+<p>Un retour depuis l&#39;API serait, par exemple, sous la forme :</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>You are disconnected</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque vous avez réussi à vous déconnecter de l'API, le code de retour (status_code) est le 200.
+</aside>
+<h1 id='modification-du-compte'>Modification du compte</h1><h2 id='affichage-de-vos-informations-personnelles'>Affichage de vos informations personnelles</h2>
+<p>Afin de récupérer correctement toutes les informations de votre compte, lancez la requête suivante.</p>
+
+<aside class="notice">
+La requête est en <code>GET</code>
+</aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/getUserInformation
+
+</code></pre><h3 id='requete-http-5'>Requête HTTP :</h3>
+<p><code>GET https://api.offroute.fr/Users/getUserInformation</code></p>
+<h3 id='arguments-attendus-5'>Arguments attendus :</h3>
+<p>Afin de lancer la requête, vous n&#39;aurez besoin de connaître qu&#39;un seul argument : Le <code>token</code></p>
+<h3 id='retour-5'>Retour :</h3>
+<p>Un retour depuis l&#39;API serait, par exemple, sous la forme :</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>login</td>
+<td>Shaun</td>
+</tr>
+<tr>
+<td>age</td>
+<td>21</td>
+</tr>
+<tr>
+<td>password</td>
+<td>poli45\</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Arthur</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Lefèvre</td>
+</tr>
+<tr>
+<td>email</td>
+<td>shone.witze@gmail.com</td>
+</tr>
+<tr>
+<td>Id</td>
+<td>142</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque la requête à fonctionné et que vous avez pu récupéré les informations, le code de retour (status_code) est le 200.
+</aside>
+<h2 id='modification-de-vos-informations-personnelles'>Modification de vos informations personnelles</h2>
+<p>Afin de modifier, certaines ou la totalité de vos informations personnelles, lancez la requête suivante.</p>
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU", "login":"wonderful_unicorn", "age":"24"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/setUserInformation
+
+</code></pre><h3 id='requete-http-6'>Requête HTTP :</h3>
+<p><code>POST https://api.offroute.fr/Users/setUserInformation</code></p>
+<h3 id='arguments-attendus-6'>Arguments attendus :</h3>
+<p>Afin de lancer la requête, vous n&#39;aurez besoin de connaître qu&#39;un seul argument : Le <code>token</code>, suivi des arguments et des clés que vous souhaitez modifier parmi la liste suivante :</p>
+
+<table><thead>
+<tr>
+<th>Arguments</th>
+<th>Exemple de clés</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>login</td>
+<td>Shaun The Sheep</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Wrath56/</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Emmanuel</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Decronumbourg</td>
+</tr>
+<tr>
+<td>age</td>
+<td>21</td>
+</tr>
+<tr>
+<td>email</td>
+<td>shone.witze@gmail.com</td>
+</tr>
+<tr>
+<td>Id</td>
+<td>142</td>
+</tr>
+</tbody></table>
+
+<p>Il n&#39;est pas nécessaire de rajouter en argument, des informations que vous en souhaitez pas modifier.</p>
+<h3 id='retour-6'>Retour :</h3>
+<p>Lorsque la requête a été correctement exécuté, l&#39;API vous renverra une liste récapitulant toutes vos informations personnelles.</p>
+
+<p>Ainsi, un retour depuis l&#39;API pourrait être sous la forme :</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>login</td>
+<td>Shaun The Sheep</td>
+</tr>
+<tr>
+<td>age</td>
+<td>21</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Wrath56/</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Emmanuel</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Decronumbourg</td>
+</tr>
+<tr>
+<td>email</td>
+<td>shone.witze@gmail.com</td>
+</tr>
+<tr>
+<td>Id</td>
+<td>142</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque les informations ont été correctement modifié, le code de retour (status_code) est le 200.
+</aside>
+<h2 id='changement-du-mot-de-passe'>Changement du mot de passe</h2>
+<p>Afin de changer le mot de passe, il vous faut passer par cette requête.</p>
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU", "new_password":"secret_unicorn"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/updateUserPassword
+
+</code></pre><h3 id='requete-http-7'>Requête HTTP :</h3>
+<p><code>POST https://api.offroute.fr/Users/updateUserPassword</code></p>
+<h3 id='arguments-attendus-7'>Arguments attendus :</h3>
+<p>Afin de lancer la requête, vous n&#39;aurez besoin de connaître qu&#39;un seul argument : Le <code>token</code>, il vous suffira de suivre cet argument du nouveau mot de passe.</p>
+<h3 id='retour-7'>Retour :</h3>
+<p>Lorsque la requête a été correctement exécuté, l&#39;API vous renverra le mot de passe modifié.</p>
+
+<p>Un retour depuis l&#39;API peut être, par exemple :</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>password</td>
+<td>secret_unicorn</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Your password has been changed</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque le mot de passe est changé avec succès, le code de retour (status_code) est le 200.
+</aside>
+<h2 id='recuperation-du-mot-de-passe'>Récupération du mot de passe</h2>
+<p>Afin de récupérer le mot de passe, en cas de perte, il vous faut passer par cette requête.</p>
+
+<aside class="notice">
+La requête est en <code>GET</code>
+</aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"email":"shone.witze@gmail.com", "username":"Shaun The Sheep"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/getUserPassword
+
+</code></pre><h3 id='requete-http-8'>Requête HTTP :</h3>
+<p><code>GET https://api.offroute.fr/Users/getUserPassword</code></p>
+<h3 id='arguments-attendus-8'>Arguments attendus :</h3>
+<p>Afin de lancer la requête, vous n&#39;aurez besoin de connaître qu&#39;un seul argument : le <code>token</code>. Il vous suffira de faire suivre cet argument par le nouveau mot de passe.</p>
+<h3 id='retour-8'>Retour :</h3>
+<p>Lorsque la requête a été correctement exécuté, l&#39;API vous renverra le mot de passe modifié.</p>
+
+<p>Un retour depuis l&#39;API peut être, par exemple :</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>password</td>
+<td>secret_unicorn</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Your password has been changed</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque les informations ont été correctement modifié, le code de retour (status_code) est le 200.
+</aside>
+<h2 id='suppression-du-compte'>Suppression du compte</h2>
+<p>Si un compte doit être supprimé, il faut passer par cette requête.</p>
+
+<aside class="notice">
+La requête est en <code>POST</code>
+</aside>
+<pre class="highlight shell tab-shell"><code>
+<span class="nb">time </span>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span>
+<span class="s1">'{"token":"im8Md1lnVxhGGhgsjsHrksF5ByU"}'</span> <span class="se">\</span>
+https://api.offroute.fr/Users/deleteUser
+
+</code></pre><h3 id='arguments-attendus-9'>Arguments attendus :</h3>
+<p>Afin de lancer la requête, vous n&#39;aurez besoin de connaître qu&#39;un seul argument : Le <code>token</code>.</p>
+<h3 id='retour-9'>Retour :</h3>
+<p>Lorsque la requête a été correctement exécuté, l&#39;API vous indiquera le suppression du compte.</p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Valeur</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status_code</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Your account has been deleted</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Lorsque le compte a été supprimé avec succès, le code de retour (status_code) est le 200.
+</aside>
+<h1 id='errors'>Errors</h1>
+<p>L&#39;API Offroute utilise les codes d&#39;erreurs suivants</p>
+
+<table><thead>
+<tr>
+<th>Numéro du code</th>
+<th>Signification</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>La requête réussit avec succès. Aucune erreur n&#39;a été détecté.</td>
+</tr>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>La requête a échoué.</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="JSON">JSON</a>
           </div>
       </div>
     </div>
