@@ -38,7 +38,7 @@ La requête est en <code>POST</code>
 
 ```shell
 
-time curl -X POST -H "Content-Type: application/json" -H\
+time curl -X POST -H "Content-Type: application/json" -H \
 "X-Access-Token":"1234567890" -d \
 '{"email":"test@epitech.eu", "password":"123456", "username":"Unicorn"}' \
 https://api.offroute.fr/Users/CreateUser
@@ -167,7 +167,7 @@ La requête est en <code>DELETE</code>
 ```shell
 
 time curl -X DELETE -H "Content-Type: application/json" -H \
-"X-Access-Token":"1234567890"\
+"X-Access-Token":"1234567890" \
 https://api.offroute.fr/Users/Logout
 
 ```
@@ -207,7 +207,7 @@ La requête est en <code>GET</code>
 ```shell
 
 time curl -X GET -H "Content-Type: application/json" -H \
-"X-Access-Token: 8iVdv2PCvWbJJNp" -d\
+"X-Access-Token: 8iVdv2PCvWbJJNp" \
 https://api.offroute.fr/Users/getUserInformation
 
 ```
@@ -251,7 +251,7 @@ La requête est en <code>PUT</code>
 ```shell
 
 time curl -X PUT -H "Content-Type: application/json" -H \
-"X-Access-Token: 8iVdv2PCvWbJJNp" -d
+"X-Access-Token: 8iVdv2PCvWbJJNp" -d \
 '{"Username":"Wonderful_unicorn"}' \
 https://api.offroute.fr/Users/setUserModification
 
